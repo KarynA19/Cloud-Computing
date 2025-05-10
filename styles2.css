@@ -1,0 +1,567 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #f5f7fa;
+    color: #2d3748;
+    line-height: 1.6;
+}
+
+/* Layout */
+.app-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #1a202c;
+    color: white;
+    padding: 2rem;
+    position: fixed;
+    width: 250px;
+    height: 100vh;
+}
+
+.logo h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #fff;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    margin-bottom: 0.5rem;
+}
+
+.nav-links a {
+    color: #a0aec0;
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    display: block;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.nav-links li.active a,
+.nav-links a:hover {
+    background-color: #2d3748;
+    color: white;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 250px;
+    padding: 2rem;
+}
+
+/* Top Navigation */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.status-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-badge.online {
+    background-color: #c6f6d5;
+    color: #2f855a;
+}
+
+.status-badge.warning {
+    background-color: #fefcbf;
+    color: #975a16;
+}
+
+.time {
+    color: #718096;
+    font-size: 0.875rem;
+}
+
+/* Dashboard Body */
+.dashboard-body {
+    max-width: calc(3 * 300px + 2 * 1.5rem);
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+/* Sensor Cards Grid */
+.sensors-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    align-items: stretch;
+}
+
+.sensor-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.sensor-card.normal {
+    border-left: 4px solid #48bb78;
+}
+
+.sensor-card.warning {
+    border-left: 4px solid #ed8936;
+}
+
+.sensor-card.critical {
+    border-left: 4px solid #e53e3e;
+}
+
+.sensor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.status-label {
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-label.normal {
+    background: #c6f6d5;
+    color: #2f855a;
+}
+
+.status-label.warning {
+    background: #fefcbf;
+    color: #975a16;
+}
+
+.status-label.critical {
+    background: #fed7d7;
+    color: #c53030;
+}
+
+.sensor-value {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 1rem 0;
+}
+
+.sensor-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #718096;
+    font-size: 0.875rem;
+}
+
+/* Graph Section */
+.graphs-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.graph-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 1000px;
+    grid-column: 1 / -1; /* Stretch full width in grid */
+}
+
+.graph-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #2d3748;
+}
+
+.graph-placeholder {
+    display: flex;
+    background: #edf2f7;
+    border-radius: 8px;
+    height: 300px;
+    padding: 1rem;
+    box-sizing: border-box;
+    gap: 1rem;
+}
+
+
+/* Optional: axis/line mockup styles */
+.graph-line {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    height: 100%;;
+}
+
+.line-point {
+    position: absolute;
+    width: 6%;
+    background-color: #3182ce;
+    border-radius: 4px 4px 0 0;
+    bottom: 0;
+    transition: height 0.3s;
+}
+
+.graph-x-axis {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 1rem;
+    font-size: 0.9rem;
+    color: #000000;
+    
+    
+    padding-right: 5%;
+}
+.graph-y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 0.9rem;
+    color: #040404;
+    width: 50px;
+    padding-bottom: 3%;
+}
+.graph-area {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.alert-section {
+    margin-bottom: 2rem;
+}
+
+.alert-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #e53e3e; /* critical default */
+    width: 600px;
+}
+
+.alert-card.critical {
+    border-left-color: #e53e3e;
+}
+
+.alert-card.warning {
+    border-left-color: #ed8936;
+}
+
+.alert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.alert-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #c53030;
+}
+
+.alert-time {
+    font-size: 0.875rem;
+    color: #718096;
+}
+
+.alert-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #718096;
+}
+.recommendations {
+    margin-top: 1rem;
+}
+
+.recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.recommendation-card {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    width: 600px;
+}
+
+.recommendation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.recommendation-header h3 {
+    font-size: 1.1rem;
+    color: #2d3748;
+}
+
+.priority {
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.priority.high {
+    background: #fed7d7;
+    color: #c53030;
+}
+
+.priority.medium {
+    background: #fefcbf;
+    color: #975a16;
+}
+
+.priority.low {
+    background: #c6f6d5;
+    color: #2f855a;
+}
+
+
+
+/* Game Mode Styles */
+.game-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 2rem;
+}
+
+.timer-section {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.timer-display {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.timer-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #2196F3, #00BCD4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.timer-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.engineers-section {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.engineers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.engineer-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.engineer-card:hover {
+    transform: translateY(-2px);
+}
+
+.engineer-info h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.role {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.score {
+    font-weight: bold;
+    color: #2196F3;
+}
+
+.actions-section {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.action-buttons {
+    border-radius: 10px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    padding: 0.5rem;
+}
+.action-buttons2 {
+    border-radius: 10px;
+    display: block;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: white;
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.05);
+}
+.action-btn {
+    padding: 1.2rem 1.5rem;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.action-btn:hover::before {
+    opacity: 1;
+}
+
+.action-btn.primary {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+    color: white;
+}
+
+.action-btn.secondary {
+    background: linear-gradient(135deg, #4CAF50, #388E3C);
+    color: white;
+}
+
+.action-btn.tertiary {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    color: white;
+}
+
+.action-btn.warning {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+}
+
+.action-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.action-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.game-status {
+    font-weight: bold;
+    color: #2196F3;
+    margin-right: 1rem;
+    font-size: 1.1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .sensors-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .graphs-vertical {
+        margin-top: 1.5rem;
+ }
+}
