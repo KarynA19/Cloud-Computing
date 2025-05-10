@@ -1,133 +1,119 @@
-<!DOCTYPE html> 
-<html lang="en"> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Statistics</title>
+  <link rel="stylesheet" href="styles2.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="chat.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="logo">
+        <h2>EnvMonitor</h2>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="alerts.html">Alerts & Recommendations</a></li>
+        <li><a href="game.html">Engineer Game Mode</a></li>
+        <li class="active"><a href="statistics.html">Statistics</a></li>
+      </ul>
+           <!-- Message Manager Button at the Bottom -->
+           <ul class="nav-links" style="margin-top: 300px; text-align: center;">
+            <li><a href="#" class="message-manager">Chat Manager</a></li>
+        </ul>
+    </nav>
 
-<head> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>System Statistics</title> <!-- הטקסט שמופיע בלשונית הדפדפן -->
-    <link rel="stylesheet" href="styles2.css">
-</head> 
+    <!-- Main content -->
+    <main class="main-content">
+      <nav class="top-nav">
+        <div class="nav-left">
+          <h1>System Statistics</h1>
+        </div>
+        <div class="nav-right">
+          <span class="status-badge online">System Online</span>
+          <span class="time">Last Updated: <span id="lastUpdated">Loading...</span></span>
+        </div>
+      </nav>
 
-<body> 
-    <div class="app-container"> 
-
-        
-        <nav class="sidebar">
-            <div class="logo"> 
-                <h2>EnvMonitor</h2> <!-- שם המערכת -->
+      <div class="dashboard-body">
+        <!-- Summary Cards -->
+        <div class="sensors-grid">
+          <div class="sensor-card">
+            <div class="sensor-header">
+              <h3>Total Searches</h3>
             </div>
-            <ul class="nav-links"> 
-                <li><a href="index.html">Dashboard</a></li> 
-                <li><a href="alerts.html">Alerts & Recommendations</a></li> 
-                <li><a href="game.html">Engineer Game Mode</a></li> 
-                <li class="active"><a href="statistics.html">Statistics</a></li> 
-        </nav>
+            <div class="sensor-value" id="totalQueries">Loading...</div>
+            <div class="sensor-meta"><span>Since launch</span></div>
+          </div>
 
-     
-        <main class="main-content"> 
+          <div class="sensor-card">
+            <div class="sensor-header">
+              <h3>Top Search Term</h3>
+            </div>
+            <div class="sensor-value" id="topSearchTerm">Loading...</div>
+            <div class="sensor-meta"><span>Most frequent</span></div>
+          </div>
 
-            
-            <nav class="top-nav"> 
-                <div class="nav-left">
-                    <h1>System Statistics</h1> <!-- כותרת ראשית של הדף -->
-                </div>
-                <div class="nav-right"> <!-- צד ימין של הסרגל העליון -->
-                    <span class="status-badge online">System Online</span> <!-- סטטוס מערכת (פועל) -->
-                    <span class="time">Last Updated: 10:45 AM</span> <!-- זמן העדכון האחרון -->
-                </div>
-            </nav>
+          <div class="sensor-card">
+            <div class="sensor-header">
+              <h3>Average Response</h3>
+            </div>
+            <div class="sensor-value" id="avgResponse">Loading...</div>
+            <div class="sensor-meta"><span>In seconds</span></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 
-            <!-- אזור התוכן של סטטיסטיקות -->
-            <div class="dashboard-body"> <!-- עוטף את כל מה שבתוך הגוף -->
+  <!-- JavaScript -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
-                <!-- שלושה כרטיסים עם נתונים כלליים -->
-                <div class="sensors-grid"> <!-- גריד של כרטיסים -->
+    const firebaseConfig = {
+      apiKey: "AIzaSyAm2uh6aiNIwlfjxgPLxJLL7auZstt7NW4",
+      authDomain: "monitorstats-983e4.firebaseapp.com",
+      projectId: "monitorstats-983e4",
+      storageBucket: "monitorstats-983e4.firebasestorage.app",
+      messagingSenderId: "253864315528",
+      appId: "1:253864315528:web:5e9bfa859f7b7901ad2d3d"
+    };
 
-                    <!-- כרטיס ראשון: כמה חיפושים בוצעו -->
-                    <div class="sensor-card">
-                        <div class="sensor-header">
-                            <h3>Total Searches</h3> <!-- כותרת הכרטיס -->
-                        </div>
-                        <div class="sensor-value">128</div> <!-- המספר בפועל (כמות החיפושים) -->
-                        <div class="sensor-meta"><span>Since launch</span></div> <!-- טקסט משלים -->
-                    </div>
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const qCol = collection(db, "queries");
 
-                    <!-- כרטיס שני: מילת החיפוש הכי נפוצה -->
-                    <div class="sensor-card">
-                        <div class="sensor-header">
-                            <h3>Top Search Term</h3> <!-- כותרת -->
-                        </div>
-                        <div class="sensor-value">"mqtt"</div> <!-- המונח הנפוץ ביותר -->
-                        <div class="sensor-meta"><span>Used 18 times</span></div> <!-- הסבר נוסף -->
-                    </div>
+    onSnapshot(qCol, (snapshot) => {
+      let total = 0;
+      let sumResponseTime = 0;
+      let termCounts = {};
 
-                    <!-- כרטיס שלישי: זמן תגובה הכי מהיר -->
-                    <div class="sensor-card">
-                        <div class="sensor-header">
-                            <h3>Fastest Response</h3> <!-- כותרת -->
-                        </div>
-                        <div class="sensor-value">0.32s</div> <!-- הערך המהיר ביותר -->
-                        <div class="sensor-meta"><span>on Apr 03</span></div> <!-- תאריך -->
-                    </div>
-                </div>
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        total++;
+        sumResponseTime += data.responseTime || 0;
 
-                <!-- גרף של מילות חיפוש נפוצות -->
-                <div class="graph-card"> <!-- קופסה לגרף -->
-                    <div class="graph-header">
-                        <h2>Top 5 Search Terms</h2> <!-- כותרת לגרף -->
-                    </div>
-                    <div class="graph-placeholder"> <!-- אזור הצגת הגרף -->
-                        <div class="graph-y-axis"> <!-- ציר Y עם ערכים -->
-                            <span>20</span>
-                            <span>15</span>
-                            <span>10</span>
-                            <span>5</span>
-                            <span>0</span>
-                        </div>
-                        <div class="graph-area bar-chart"> <!-- אזור העמודות -->
-                            <div class="bar" style="height: 90%;">mqtt</div> <!-- עמודה עם 90% גובה -->
-                            <div class="bar" style="height: 75%;">sensor</div> <!-- עמודה -->
-                            <div class="bar" style="height: 60%;">protocol</div> <!-- עמודה -->
-                            <div class="bar" style="height: 50%;">connect</div> <!-- עמודה -->
-                            <div class="bar" style="height: 45%;">subscribe</div> <!-- עמודה -->
-                        </div>
-                    </div>
-                </div>
+        const term = data.term;
+        if (term) {
+          termCounts[term] = (termCounts[term] || 0) + 1;
+        }
+      });
 
-                <!-- טבלה של הדפים שהופיעו הכי הרבה בתוצאות -->
-                <div class="graph-card"> <!-- קופסה נוספת עם טבלה -->
-                    <div class="graph-header">
-                        <h2>Most Retrieved Documents</h2> <!-- כותרת -->
-                    </div>
-                    <table class="stats-table"> <!-- טבלת נתונים -->
-                        <thead> <!-- כותרת הטבלה -->
-                            <tr>
-                                <th>DocID</th> <!-- מזהה מסמך -->
-                                <th>Title</th> <!-- שם המסמך -->
-                                <th>Views</th> <!-- כמות הופעות -->
-                            </tr>
-                        </thead>
-                        <tbody> <!-- גוף הטבלה (נתונים בפועל) -->
-                            <tr>
-                                <td>12</td>
-                                <td>MQTT Overview</td>
-                                <td>31</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Sensor Configurations</td>
-                                <td>27</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Client Connection Guide</td>
-                                <td>22</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> <!-- סוף הטבלה -->
-            </div> <!-- סוף גוף הדף -->
-        </main> <!-- סוף התוכן המרכזי -->
-    </div> <!-- סוף העטיפה הכוללת -->
-</body> <!-- סוף גוף הדף -->
-</html> <!-- סוף מסמך ה־HTML --\>
+      // Get top search term
+      const sortedTerms = Object.entries(termCounts).sort((a, b) => b[1] - a[1]);
+      const topTerm = sortedTerms.length > 0 ? sortedTerms[0][0] : "—";
+
+      // Update HTML
+      document.getElementById("totalQueries").innerText = total;
+      document.getElementById("avgResponse").innerText = total > 0 ? (sumResponseTime / total).toFixed(2) + "s" : "0.00s";
+      document.getElementById("topSearchTerm").innerText = topTerm;
+      document.getElementById("lastUpdated").innerText = new Date().toLocaleTimeString();
+    });
+  </script>
+</body>
+</html>
