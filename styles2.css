@@ -88,7 +88,7 @@ body.statistics-body {
     padding: 0.5rem 1.25rem;
     border-radius: 1rem;
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 500;
     background-color: #d1f5e0;
     color: #1a3f2b;
     box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
@@ -106,45 +106,45 @@ body.statistics-body {
 
 .statistics-time {
     color: #1a202c;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 0.95rem;
     background-color: #edf2f7;
-    padding: 0.4rem 0.8rem;
+    padding: 0.4rem 0.3rem;
     border-radius: 0.5rem;
     box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
 }
 
 /* Dashboard Body */
 .statistics-body-section {
-    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-left: 2rem;
-    gap: 2rem;
+    padding-left: 1rem;
+    gap: 1rem;
 }
 
 /* Sensor Cards */
 .statistics-sensors-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 0.2rem;
     align-items: stretch;
 }
 
 .statistics-card {
     background: linear-gradient(145deg, #0b1e30, #142b3c);
     border-radius: 1rem;
-    padding: 1.5rem;
+    padding: 1rem;
     box-shadow: 0 4px 20px rgba(0, 255, 255, 0.05);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     color: #e6f1ff;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
-    min-width: 320px;  /* ✨ רחב יותר */
-    width: 100%;
+    max-width: 200px; /* הגבלת רוחב */
+    width: 100%; /* שמירה על גמישות */
+    margin-bottom: 0.5rem; /* הקטנת הרווח בין הכרטיסים */
+
 }
 
 
@@ -291,12 +291,11 @@ body.statistics-body {
     
 }
 .statistics-graphs-row {
- display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   justify-content: flex-end; /* הזזת כל הגרפים ימינה */
-  gap: 2rem;
+  gap: 0.5rem;
 }
 
 .statistics-graphs-row .statistics-graph {
