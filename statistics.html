@@ -5,72 +5,144 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>System Statistics</title>
   <link rel="stylesheet" href="styles2.css" />
-  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="chat.js"></script>
 </head>
-<body>
-  <div class="app-container">
+<body class="statistics-body">
+  <div class="statistics-container">
     <!-- Sidebar -->
-    <nav class="sidebar">
-      <div class="logo">
+    <nav class="statistics-sidebar">
+      <div class="statistics-logo">
         <h2>EnvMonitor</h2>
       </div>
-      <ul class="nav-links">
+      <ul class="statistics-nav">
         <li><a href="index.html">Dashboard</a></li>
         <li><a href="alerts.html">Alerts & Recommendations</a></li>
         <li><a href="game.html">Engineer Game Mode</a></li>
         <li class="active"><a href="statistics.html">Statistics</a></li>
       </ul>
-           <!-- Message Manager Button at the Bottom -->
-           <ul class="nav-links" style="text-align: center;">
-            <li><a href="#" class="message-manager">Chat Manager</a></li>
-        </ul>
+      <ul class="statistics-nav" style="text-align: center;">
+        <li><a href="#" class="message-manager">Chat Manager</a></li>
+      </ul>
+      </ul>
+                  
     </nav>
 
+    <!-- בפנים ה-HTML -->
+<div class="data-stream-panel">
+  <div class="data-line">[Temp] Sensor A: 26.4°C ↑</div>
+  <div class="data-line">[Pressure] Node B: 1035 hPa ↘</div>
+  <div class="data-line">[Humidity] Zone C: 45% ↔</div>
+
+
+  <div class="data-line">[Temp] Sensor D: 22.1°C ↑</div>
+  <div class="data-line">[Pressure] Node E: 1012 hPa ↘</div>    
+  <div class="data-line">[Humidity] Zone F: 55% ↔</div>
+  
+  <div class="data-line">[Temp] Sensor G: 24.8°C ↑</div>
+  <div class="data-line">[Pressure] Node H: 1008 hPa ↘</div>
+  <div class="data-line">[Humidity] Zone I: 50% ↔</div> 
+  <div class="data-line">[Temp] Sensor J: 23.5°C ↑</div>
+  <div class="data-line">[Pressure] Node K: 1015 hPa ↘</div>    
+  <div class="data-line">[Humidity] Zone L: 48% ↔</div>
+  <div class="data-line">[Temp] Sensor M: 25.0°C ↑</div>
+  <div class="data-line">[Pressure] Node N: 1020 hPa ↘</div>
+  <div class="data-line">[Humidity] Zone O: 52% ↔</div>
+  <div class="data-line">[Temp] Sensor P: 24.5°C ↑</div>
+  <div class="data-line">[Pressure] Node Q: 1010 hPa ↘</div>
+  <div class="data-line">[Humidity] Zone R: 49% ↔</div>
+  <div class="data-line">[Temp] Sensor S: 23.8°C ↑</div>
+  <div class="data-line">[Pressure] Node T: 1018 hPa ↘</div>
+  <div class="data-line">[Humidity] Zone U: 51% ↔</div>
+    
+</div>
+
+
     <!-- Main content -->
-    <main class="main-content">
-      <nav class="top-nav">
-        <div class="nav-left">
+    <main class="statistics-main">
+      <nav class="statistics-top-nav">
+        
           <h1>System Statistics</h1>
-        </div>
-        <div class="nav-right">
-          <span class="status-badge online">System Online</span>
-          <span class="time">Last Updated: <span id="lastUpdated">Loading...</span></span>
+      
+        <div class="statistics-nav-right">
+          <span class="statistics-status online">System Online</span>
+          <span class="statistics-time">Last Updated: <span id="lastUpdated">Loading...</span></span>
         </div>
       </nav>
 
-      <div class="dashboard-body">
+      <div class="statistics-body-section">
         <!-- Summary Cards -->
-        <div class="sensors-grid">
-          <div class="sensor-card">
-            <div class="sensor-header">
-              <h3>Total Searches</h3>
-            </div>
-            <div class="sensor-value" id="totalQueries">Loading...</div>
-            <div class="sensor-meta"><span>Since launch</span></div>
+        <div class="statistics-sensors-grid">
+          <div class="statistics-card">
+            <h3>Total Searches</h3>
+            <div class="statistics-value" id="totalQueries">Loading...</div>
+            <div class="statistics-meta"><span>Since launch</span></div>
           </div>
 
-          <div class="sensor-card">
-            <div class="sensor-header">
-              <h3>Top Search Term</h3>
-            </div>
-            <div class="sensor-value" id="topSearchTerm">Loading...</div>
-            <div class="sensor-meta"><span>Most frequent</span></div>
+          <div class="statistics-card">
+            <h3>Top Search Term</h3>
+            <div class="statistics-value" id="topSearchTerm">Loading...</div>
+            <div class="statistics-meta"><span>Most frequent</span></div>
           </div>
 
-          <div class="sensor-card">
-            <div class="sensor-header">
-              <h3>Average Response</h3>
-            </div>
-            <div class="sensor-value" id="avgResponse">Loading...</div>
-            <div class="sensor-meta"><span>In seconds</span></div>
+          <div class="statistics-card">
+            <h3>Average Response</h3>
+            <div class="statistics-value" id="avgResponse">Loading...</div>
+            <div class="statistics-meta"><span>In seconds</span></div>
+          </div>
+        </div>
+
+        <!-- Sensor Stats Section -->
+        <div class="statistics-graph">
+          <h2>Sensor Statistics</h2>
+          <table class="statistics-table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Avg Reading</th>
+                <th>Last Reading</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Temperature</td>
+                <td id="temperatureAvg">--</td>
+                <td id="temperatureLast">--</td>
+                <td id="temperatureStatus">--</td>
+              </tr>
+              <tr>
+                <td>Humidity</td>
+                <td id="humidityAvg">--</td>
+                <td id="humidityLast">--</td>
+                <td id="humidityStatus">--</td>
+              </tr>
+              <tr>
+                <td>Pressure</td>
+                <td id="pressureAvg">--</td>
+                <td id="pressureLast">--</td>
+                <td id="pressureStatus">--</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Chart.js Graphs Side by Side -->
+        <div class="statistics-graphs-row">
+          <div class="statistics-graph">
+            <h2>Temperature History</h2>
+            <canvas id="tempChart" ></canvas>
+          </div>
+          <div class="statistics-graph">
+            <h2>Sensor Readings Distribution</h2>
+            <canvas id="sensorPieChart" ></canvas>
           </div>
         </div>
       </div>
     </main>
   </div>
 
-  <!-- JavaScript -->
+  <!-- Firebase + ChartJS -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
     import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
@@ -79,15 +151,16 @@
       apiKey: "AIzaSyAm2uh6aiNIwlfjxgPLxJLL7auZstt7NW4",
       authDomain: "monitorstats-983e4.firebaseapp.com",
       projectId: "monitorstats-983e4",
-      storageBucket: "monitorstats-983e4.firebasestorage.app",
+      storageBucket: "monitorstats-983e4.appspot.com",
       messagingSenderId: "253864315528",
       appId: "1:253864315528:web:5e9bfa859f7b7901ad2d3d"
     };
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const qCol = collection(db, "queries");
 
+    // Query stats
+    const qCol = collection(db, "queries");
     onSnapshot(qCol, (snapshot) => {
       let total = 0;
       let sumResponseTime = 0;
@@ -97,22 +170,101 @@
         const data = doc.data();
         total++;
         sumResponseTime += data.responseTime || 0;
-
         const term = data.term;
         if (term) {
           termCounts[term] = (termCounts[term] || 0) + 1;
         }
       });
 
-      // Get top search term
       const sortedTerms = Object.entries(termCounts).sort((a, b) => b[1] - a[1]);
       const topTerm = sortedTerms.length > 0 ? sortedTerms[0][0] : "—";
 
-      // Update HTML
       document.getElementById("totalQueries").innerText = total;
       document.getElementById("avgResponse").innerText = total > 0 ? (sumResponseTime / total).toFixed(2) + "s" : "0.00s";
       document.getElementById("topSearchTerm").innerText = topTerm;
       document.getElementById("lastUpdated").innerText = new Date().toLocaleTimeString();
+    });
+
+    // Sensor readings
+    const sensorCol = collection(db, "sensorReadings");
+    onSnapshot(sensorCol, (snapshot) => {
+      const sensorData = { temperature: [], humidity: [], pressure: [] };
+
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        if (sensorData[data.type]) {
+          sensorData[data.type].push(data);
+        }
+      });
+
+      const chartLabels = [];
+      const chartValues = [];
+
+      ["temperature", "humidity", "pressure"].forEach(type => {
+        const readings = sensorData[type];
+        if (readings.length === 0) return;
+
+        const avg = (
+          readings.reduce((sum, r) => sum + r.value, 0) / readings.length
+        ).toFixed(1);
+
+        const latest = readings.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))[0];
+        const unit = type === "humidity" ? "%" : type === "pressure" ? " hPa" : "°C";
+        const cap = (txt) => txt.charAt(0).toUpperCase() + txt.slice(1);
+
+        document.getElementById(`${type}Avg`).innerText = avg + unit;
+        document.getElementById(`${type}Last`).innerText = latest.value + unit;
+        document.getElementById(`${type}Status`).innerText = cap(latest.status);
+
+        chartLabels.push(cap(type));
+        chartValues.push(parseFloat(avg));
+      });
+
+      // Line chart - Temperature history
+      const tempReadings = sensorData["temperature"].sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+      const tempLabels = tempReadings.map(r => new Date(r.timestamp).toLocaleTimeString());
+      const tempValues = tempReadings.map(r => r.value);
+
+      new Chart(document.getElementById("tempChart"), {
+        type: "line",
+        data: {
+          labels: tempLabels,
+          datasets: [{
+            label: "Temperature Over Time",
+            data: tempValues,
+            backgroundColor: "rgba(0, 204, 255, 0.2)",
+            borderColor: "rgba(0, 204, 255, 1)",
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'top' },
+            title: { display: true, text: 'Temperature History' }
+          }
+        }
+      });
+
+      // Pie chart - Average sensor distribution
+      new Chart(document.getElementById("sensorPieChart"), {
+        type: "pie",
+        data: {
+          labels: chartLabels,
+          datasets: [{
+            label: "Sensor Distribution",
+            data: chartValues,
+            backgroundColor: ["#36A2EB", "#FFCE56", "#FF6384"]
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: "bottom" },
+            title: { display: true, text: "Sensor Readings Distribution" }
+          }
+        }
+      });
     });
   </script>
 </body>
