@@ -9,6 +9,15 @@
   <script src="chat.js"></script>
 </head>
 <body>
+  <div class="chat-container">
+  <div class="chat-header">💬 Manager Chat</div>
+  <div class="chat-messages" id="chat-box"></div>
+  <div class="chat-input">
+    <input type="text" id="chat-input" placeholder="Type your message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
   <div class="app-container">
     <!-- Sidebar -->
     <nav class="sidebar">
@@ -20,6 +29,7 @@
         <li><a href="alerts.html">Alerts & Recommendations</a></li>
         <li><a href="game.html">Engineer Game Mode</a></li>
         <li class="active"><a href="statistics.html">Statistics</a></li>
+        <li><a href="manager.html">Manager Panel</a></li>
       </ul>
            <!-- Message Manager Button at the Bottom -->
            <ul class="nav-links" style="margin-top: 300px; text-align: center;">
@@ -115,5 +125,6 @@
       document.getElementById("lastUpdated").innerText = new Date().toLocaleTimeString();
     });
   </script>
+  <script src="chat.js"></script>
 </body>
 </html>
