@@ -10,6 +10,15 @@
     
 </head>
 <body>
+    <div class="chat-container">
+  <div class="chat-header">💬 Manager Chat</div>
+  <div class="chat-messages" id="chat-box"></div>
+  <div class="chat-input">
+    <input type="text" id="chat-input" placeholder="Type your message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
     <div class="app-container">
         <!-- Sidebar -->
         <nav class="sidebar">
@@ -20,7 +29,8 @@
                 <li class="active"><a href="index.html">Dashboard</a></li>
                 <li><a href="alerts.html">Alerts & Recommendations</a></li>
                 <li><a href="game.html">Engineer Game Mode</a></li>
-                <li><a href="statistics.html">Statistics</a></li>    
+                <li><a href="statistics.html">Statistics</a></li>
+                <li><a href="manager.html">Manager Panel</a></li>   
                </ul>
 
                <!-- Message Manager Button at the Bottom -->
@@ -33,6 +43,11 @@
         <main class="main-content">
             <!-- Top Navigation -->
             <nav class="top-nav">
+                <div class="notification-box" id="notification-box">
+  <h3>🔔 Notifications</h3>
+  <ul id="notifications-list" class="notification-list"></ul>
+</div>
+
                 <div class="nav-left">
                     <h1>Environmental Dashboard</h1>
                 </div>
@@ -223,5 +238,7 @@
             <!-- DASHBOARD BODY END -->
         </main>
     </div>
+    <script src="notifications.js" defer></script>
+    <script src="chat.js"></script>
 </body>
 </html>

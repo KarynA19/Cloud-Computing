@@ -9,6 +9,15 @@
   <script src="chat.js"></script>
 </head>
 <body class="statistics-body">
+  <div class="chat-container">
+    <div class="chat-header">💬 Manager Chat</div>
+    <div class="chat-messages" id="chat-box"></div>
+    <div class="chat-input">
+      <input type="text" id="chat-input" placeholder="Type your message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
   <div class="statistics-container">
     <!-- Sidebar -->
     <nav class="statistics-sidebar">
@@ -20,6 +29,7 @@
         <li><a href="alerts.html">Alerts & Recommendations</a></li>
         <li><a href="game.html">Engineer Game Mode</a></li>
         <li class="active"><a href="statistics.html">Statistics</a></li>
+        <li><a href="manager.html">Manager Panel</a></li>
       </ul>
       <ul class="statistics-nav" style="text-align: center;">
         <li><a href="#" class="message-manager">Chat Manager</a></li>
@@ -267,5 +277,6 @@
       });
     });
   </script>
+  <script src="chat.js"></script>
 </body>
 </html>
